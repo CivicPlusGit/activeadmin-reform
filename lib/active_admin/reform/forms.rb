@@ -40,6 +40,14 @@ module ActiveAdmin
       def form_class
         active_admin_config.form_class
       end
+
+      def create_command
+        active_admin_config.create_command
+      end
+
+      def update_command
+        active_admin_config.update_command
+      end
     end
 
     ::ActiveAdmin::ResourceController.send(:include, Forms)
