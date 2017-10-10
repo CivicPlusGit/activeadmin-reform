@@ -11,12 +11,6 @@ module ActiveAdmin
       module DataAccess
         extend ActiveSupport::Concern
 
-        # @param _resource [ActiveRecord::Base]
-        # @return [ActiveRecord::Base, Reform::Form]
-        def apply_decorations(_resource)
-          apply_form(super)
-        end
-
         def create_resource(object)
           run_create_callbacks object do
             if resource.is_a?(::Reform::Form)
@@ -46,6 +40,25 @@ module ActiveAdmin
         def save_resource(object)
           if resource.is_a?(::Reform::Form)
             super unless object.errors.any?
+          else
+            super
+          end
+        end
+
+        def build_new_resource
+          new_resource = apply_form(scoped_collection.send(method_for_build))
+          if new_resource.is_a?(::Reform::Form)
+            new_resource.assign_attributes(*resource_params)
+            new_resource
+          else
+            super
+          end
+        end
+
+        def find_resource
+          new_resource = apply_form(scoped_collection.send method_for_find, params[:id])
+          if new_resource.is_a?(::Reform::Form)
+            new_resource
           else
             super
           end

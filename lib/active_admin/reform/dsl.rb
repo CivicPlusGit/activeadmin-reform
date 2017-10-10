@@ -26,8 +26,12 @@ module ActiveAdmin
         config.update_command_name = command_name ? "::#{command_name}" : nil
       end
 
-      def form_class(form_class)
-        config.form_class_name = form_class ? "::#{form_class}" : nil
+      def create_form_class(form_class)
+        config.create_form_class_name = form_class ? "::#{form_class}" : nil
+      end
+
+      def update_form_class(form_class)
+        config.update_form_class_name = form_class ? "::#{form_class}" : nil
       end
     end
 

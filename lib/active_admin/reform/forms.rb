@@ -30,15 +30,30 @@ module ActiveAdmin
         %w(new edit).include?(action_name)
       end
 
-      def apply_form?
+      def form_class
         case action_name
-        when 'new', 'edit', 'update', 'create'
-          form_class.present?
+        when 'new', 'create'
+          create_form_class
+        when 'edit', 'update'
+          update_form_class
         end
       end
 
-      def form_class
-        active_admin_config.form_class
+      def apply_form?
+        case action_name
+        when 'new', 'create'
+          create_form_class.present?
+        when 'edit', 'update'
+          update_form_class.present?
+        end
+      end
+
+      def create_form_class
+        active_admin_config.create_form_class
+      end
+
+      def update_form_class
+        active_admin_config.update_form_class
       end
 
       def create_command

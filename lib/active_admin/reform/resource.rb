@@ -9,15 +9,20 @@ module ActiveAdmin
       extend ActiveSupport::Concern
 
       included do
-        attr_accessor :form_class_name
+        attr_accessor :create_form_class_name
+        attr_accessor :update_form_class_name
         attr_accessor :create_command_name
         attr_accessor :update_command_name
         attr_accessor :delete_command_name
       end
 
       # @return [nil, Class<Reform::Form>]
-      def form_class
-        ActiveSupport::Dependencies.constantize(form_class_name) if form_class_name
+      def create_form_class
+        ActiveSupport::Dependencies.constantize(create_form_class_name) if create_form_class_name
+      end
+
+      def update_form_class
+        ActiveSupport::Dependencies.constantize(update_form_class_name) if update_form_class_name
       end
 
       def create_command
