@@ -14,6 +14,7 @@ module ActiveAdmin
         def create_resource(object)
           run_create_callbacks object do
             if resource.is_a?(::Reform::Form)
+              object.validate({})
               unless object.errors.any?
                 create_command.run!(resource: object.model, data: object.to_nested_hash.with_indifferent_access)
               end
