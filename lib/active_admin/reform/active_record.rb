@@ -13,9 +13,7 @@ module ActiveAdmin
       # @return [Boolean]
       # Used here - https://github.com/activeadmin/activeadmin/blob/487f976/lib/active_admin/resource_controller/data_access.rb#L160
       def save
-        validate({}) && super.tap do
-          errors.merge!(model.errors, [])
-        end
+        validate({}) && (super || validate({}))
       end
 
       # @param attributes [Hash]
@@ -28,10 +26,15 @@ module ActiveAdmin
         include ::Reform::Form::ModelReflections
         include ::Reform::Form::ActiveRecord
 
-        def self.reflect_on_association(name)
-          reflection = model_class.reflect_on_association(name) || return
-          property = definitions[name.to_s]
-          (@reflections ||= {})[name] ||= Reflection.new(reflection, (property[:nested] if property))
+        validate { model.errors.each { |key, error| errors.add key, error } }
+
+        class << self
+          def reflect_on_association(name)
+            reflection = model_class.reflect_on_association(name) || return
+            property = definitions[name.to_s]
+            @reflections ||= {}
+            @reflections[name] ||= Reflection.new(reflection, (property[:nested] if property))
+          end
         end
       end
 
