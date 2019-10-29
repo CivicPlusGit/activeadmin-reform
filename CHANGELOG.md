@@ -1,3 +1,23 @@
+# 1.1.0 
+
+* Test against ActiveAdmin 2.1
+* Test against ruby 2.5.5 and 2.6.3
+* Loosen ActiveAdmin and Rails requirements.
+
+# 1.0.0
+
+* Test against ruby 2.5.3 and 2.6.1
+* Drop support rails 3.x
+* Drop support ActiveAdmin < 1.2.1
+
+# 0.6.0
+
+* Support Rails 5
+
+# 0.5.0
+
+* Support Reform s2.3.0.rc1
+
 # 0.4.0
 
 * Support ActiveAdmin 1.2.0
