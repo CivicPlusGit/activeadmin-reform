@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'activeadmin-reform'
-  spec.version       = '1.1.0'
+  spec.version       = '1.2.0'
   spec.authors       = ['Artyom Bolshakov']
   spec.email         = ['either.free@gmail.com']
 
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'rails', ['>= 4.0.0', '< 6.0']
+  spec.add_dependency 'rails', ['>= 4.0.0', '~> 6.0']
   spec.add_dependency 'activeadmin', ['>= 1.4.3', '< 3.0']
   spec.add_dependency 'disposable', '>= 0.2.0'
   spec.add_dependency 'reform', '<= 2.3.0.rc1'
